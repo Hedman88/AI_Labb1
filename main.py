@@ -1,17 +1,18 @@
 import math
 from inhabitant import Inhabitant
-from fsm import WorkState
+import fsm
 
 def main():
     inhabitants = []
     print("How many people do you want to simulate?")
     for i in range(int(input())):
         print(i)
-        inhabitants.append(Inhabitant(i+1, "Test Subject", WorkState()))
+        inhabitants.append(Inhabitant(i+1, "Test Subject", fsm.WorkAtQuarryState()))
 
     while(True):
         for i in range(len(inhabitants)):
             inhabitants[i].Update()
-            inhabitants[i].PrintStats()
+        if(type(inhabitants[0].state) == type(fsm.DeadState())):
+           break
 
 main()
