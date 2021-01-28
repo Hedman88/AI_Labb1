@@ -17,7 +17,7 @@ class ShoppingState:
 
 class SleepState:
     def Execute(self, inhabitant):
-        if(inhabitant.energy > 100-3):
+        if(inhabitant.energy > 100-3 or inhabitant.thirst < 15 or inhabitant.hunger < 15):
             inhabitant.CheckNeeds()
         else:
             inhabitant.AddStats(0, -0.5, -1, +3, +0.5)

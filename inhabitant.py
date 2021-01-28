@@ -25,6 +25,8 @@ class Inhabitant:
     def CheckNeeds(self):
         baseStatThreshold = 30
         self.ChangeState(fsm.WorkAtOfficeState())
+        if(self.money > baseStatThreshold and (self.food < 100 or self.water < 100)):
+            self.ChangeState(fsm.ShoppingState())
         if(self.hunger < baseStatThreshold):
             if(self.food > 0):
                 self.ChangeState(fsm.EatState())
