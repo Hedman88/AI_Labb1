@@ -1,4 +1,5 @@
 import fsm
+import messagehandler
 class Inhabitant:
     money = 0.0
     food = 0.0
@@ -74,13 +75,10 @@ class Inhabitant:
         print("Happiness: ", self.happiness)
 
     def SendMessage(self, rcvrID, content):
-        msg = Message(self.ID, rcvrID, content)
+        msg = messagehandler.Message(self.ID, rcvrID, content)
         
     def RcvMessage(self, msg):
         if(msg.content == "Hello there"):
             self.SendMessage(msg.senderID, "Obi Wan")
 
-class Message:
-    def __init__(self, senderID, rcvrID, content):
-        self.senderID = senderID
-        self.content = content
+
