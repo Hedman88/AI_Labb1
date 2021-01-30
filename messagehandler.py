@@ -1,16 +1,14 @@
-
+import inhabitanthandler as ih
 class MsgHandler:
-    instance = False
     def __init__(self):
-        if(instance == false):
-            self.instance = True
-            return self
-        else:
-            return self
-    def HandleMsg(self, msg, inhabitants):
-        for i in range(len(inhabitants)):
-            if(msg.rcvrID == inhabitants[i].ID):
-                inhabitants[i].RcvMessage(msg)
+        self.instance = True
+            
+    def HandleMsg(self, msg):
+        print("Inhabitant ID", msg.senderID, "sends:",'"', msg.content,'"', "to reciever ID:", msg.rcvrID)
+        print("")
+        for i in range(len(ih.handler.inhabitants)):
+            if(msg.rcvrID == ih.handler.inhabitants[i].ID):
+                ih.handler.inhabitants[i].RcvMessage(msg)
                 break;
 
 class Message:
@@ -18,3 +16,5 @@ class Message:
         self.senderID = senderID
         self.rcvrID = rcvrID
         self.content = content
+
+handler = MsgHandler()
