@@ -9,13 +9,16 @@ s = sched.scheduler(time.time, time.sleep)
 inhabitants = []
 
 def main():
-    print("How many people do you want to simulate?")
-    for i in range(int(input())):
-        print(i)
-        if(i < 2):
-            inhabitants.append(Inhabitant(i+1, "Test Subject", fsm.WorkAtQuarryState()))
-        else:
-            inhabitants.append(Inhabitant(i+1, "Test Subject", fsm.WorkAtOfficeState()))
+    #print("How many people do you want to simulate?")
+    #for i in range(int(input())):
+    #    if(i < 2):
+    #        inhabitants.append(Inhabitant(i+1, "Test Subject", fsm.WorkAtQuarryState()))
+    #    else:
+    #        inhabitants.append(Inhabitant(i+1, "Test Subject", fsm.WorkAtOfficeState()))
+    inhabitants.append(Inhabitant(1, "Gustav", fsm.WorkAtQuarryState(), 0, 100))
+    inhabitants.append(Inhabitant(2, "Olof", fsm.WorkAtQuarryState(), 30, 30))
+    inhabitants.append(Inhabitant(3, "Pelle", fsm.WorkAtOfficeState(), 0, 100))
+    inhabitants.append(Inhabitant(4, "Göran", fsm.WorkAtOfficeState(), 30, 30))
     ih.handler.inhabitants = inhabitants
     #inhabitants[0].SendMessage(2, "Hello there")
     s.enter(1, 1, gameloop)

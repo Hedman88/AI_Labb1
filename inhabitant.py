@@ -11,11 +11,14 @@ class Inhabitant:
     energy = 100.0
     happiness = 100.0
     maxStat = 100.0
-    def __init__(self, ID, name, workPlace):
+    def __init__(self, ID, name, workPlace, money, energy):
         self.ID = ID
         self.name = name
+        self.money = money
+        self.energy = energy
         self.defaultWorkState = workPlace
         self.state = self.defaultWorkState
+        self.CheckNeeds()
 
     def Update(self):
         if(self.energy <= 0):
@@ -52,7 +55,11 @@ class Inhabitant:
             tempState = fsm.SleepState()
 
         if(self.happiness < baseStatThreshold and self.happiness < self.hunger and self.happiness < self.thirst and self.happiness < self.energy):
-            tempState = fsm.SocialState()
+            for i in ih.handler.GetInhabitants():
+                if(self.ID != i.ID):
+                    self.SendMessage(i.ID, MsgEnum.REQUEST_MEETING)
+            if(type(self.state) == type(fsm.SocialState())):
+                return
 
         self.ChangeState(tempState)
 
