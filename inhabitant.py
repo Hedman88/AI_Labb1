@@ -134,7 +134,6 @@ class Inhabitant:
                 self.ChangeState(fsm.SocialState())
         elif(msg.content == "Let's do it right now!"):
             self.ChangeState(fsm.SocialState())
-        #elif(msg.content == "I need to do other stuff, sorry."):
 
 class MsgEnum(Enum):
     GREET = 1
@@ -142,5 +141,4 @@ class MsgEnum(Enum):
     REQUEST_MEETING = 3
     RESPOND_YES = 4
     RESPOND_NO = 5
-    #LEAVE = 6
 
