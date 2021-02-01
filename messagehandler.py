@@ -1,8 +1,7 @@
 import inhabitanthandler as ih
 class MsgHandler:
-    def __init__(self):
-        self.instance = True
-            
+
+#Takes a message and finds the inhabitant to send it to.
     def HandleMsg(self, msg):
         print("Inhabitant ID", msg.senderID, "sends:",'"', msg.content,'"', "to reciever ID:", msg.rcvrID)
         print("")

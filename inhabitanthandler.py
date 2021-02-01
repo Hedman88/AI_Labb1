@@ -5,6 +5,7 @@ class InhabitantHandler:
     def GetInhabitants(self):
         return self.inhabitants
 
+#Gets all inhabitants at a given state
     def GetInhabitantsAt(self, state):
         temp = []
         for i in range(len(self.inhabitants)):

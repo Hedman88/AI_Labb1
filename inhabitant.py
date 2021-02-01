@@ -20,6 +20,7 @@ class Inhabitant:
         self.state = self.defaultWorkState
         self.CheckNeeds()
 
+#Call to execute one state action
     def Update(self):
         if(self.energy <= 0):
             self.ChangeState(fsm.SleepState())
@@ -30,6 +31,7 @@ class Inhabitant:
             
         self.state.Execute(self)
 
+#Algorithm deciding what needs to be done first
     def CheckNeeds(self):
         baseStatThreshold = 30
         tempState = fsm.WorkState()
@@ -63,6 +65,7 @@ class Inhabitant:
 
         self.ChangeState(tempState)
 
+#Check if any needs are urgent
     def CheckUrgency(self):
         urgent = False
         urgencyThreshold = 10
@@ -72,6 +75,7 @@ class Inhabitant:
         if self.happiness < urgencyThreshold : urgent = True
         return urgent
 
+#Set a new state
     def ChangeState(self, newState):
         if(type(newState) == type(fsm.WorkState())):
             self.state = self.defaultWorkState
@@ -82,6 +86,7 @@ class Inhabitant:
                 if(i.ID != self.ID):
                     self.SendMessage(i.ID, MsgEnum.GREET)
 
+#Add or subtract to inhabitants needs
     def AddStats(self, money, hunger, thirst, energy, happiness):
         self.money += money
         if self.hunger < 100 - hunger : self.hunger += hunger
@@ -104,6 +109,7 @@ class Inhabitant:
         print("Happiness: ", self.happiness)
         print("")
 
+#Create a message object and send it to the message handler
     def SendMessage(self, rcvrID, contentChoice):
         if contentChoice == MsgEnum.GREET:
             content = "Hello there!"
@@ -117,7 +123,8 @@ class Inhabitant:
             content = "I need to do other stuff, sorry."
         msg = mh.Message(self.ID, rcvrID, content)
         mh.handler.HandleMsg(msg)
-        
+
+#Translate a recieved message to actions, if any
     def RcvMessage(self, msg):
         if(type(self.state) == type(fsm.SleepState())):
             print(self.ID, "is sleeping.") 
